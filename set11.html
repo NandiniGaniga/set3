@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Maximum Element</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .instructions {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find the Maximum Element</h1>
+    <div class="instructions">
+        <p>Hi there! Enter a list of integers separated by commas (e.g., 3, 5, 7, 2, 8).</p>
+        <p>Click the button below to discover the highest number in your list!</p>
+    </div>
+    <input type="text" id="arrayInput" placeholder="Enter your integers here">
+    <button onclick="findMaximum()">Find Maximum</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function findMaximum() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(item => parseInt(item.trim())); // Convert input string to an array of numbers
+            
+            // Validate the input
+            if (arr.length === 0 || arr.some(isNaN)) {
+                document.getElementById('result').textContent = 'Oops! Please enter valid integers.';
+                return;
+            }
+            
+            // Initialize maxElement to the first element
+            let maxElement = arr[0];
+            
+            // Iterate through the array to find the maximum element
+            for (const num of arr) {
+                if (num > maxElement) {
+                    maxElement = num; // Update maxElement if a larger number is found
+                }
+            }
+            
+            // Display the result in a friendly manner
+            document.getElementById('result').textContent = `🎉 The maximum element is: ${maxElement} 🎉`;
+        }
+    </script>
+</body>
+</html>

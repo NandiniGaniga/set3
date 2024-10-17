@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotate an Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .instructions {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rotate Your Array</h1>
+    <div class="instructions">
+        <p>Welcome! Enter a list of elements separated by commas (e.g., 1, 2, 3, 4, 5).</p>
+        <p>Then, specify how many steps you’d like to rotate the array to the right.</p>
+    </div>
+    <input type="text" id="arrayInput" placeholder="Enter your elements here">
+    <input type="number" id="stepsInput" placeholder="Enter steps to rotate" min="0">
+    <button onclick="rotateArray()">Rotate Array</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function rotateArray() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(item => item.trim()); // Convert input to an array of strings
+            const k = parseInt(document.getElementById('stepsInput').value);
+            
+            // Validate the input
+            if (arr.length === 0 || arr.some(item => item === '') || isNaN(k)) {
+                document.getElementById('result').textContent = 'Oops! Please enter valid elements and a non-negative number of steps.';
+                return;
+            }
+
+            const n = arr.length;
+            const steps = k % n; // Handle cases where k is larger than n
+
+            // Rotate the array using slicing
+            const rotatedArray = [...arr.slice(n - steps), ...arr.slice(0, n - steps)];
+
+            // Display the result
+            document.getElementById('result').textContent = `Here’s your rotated array: ${rotatedArray.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
